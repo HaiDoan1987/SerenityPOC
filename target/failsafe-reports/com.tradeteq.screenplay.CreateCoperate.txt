@@ -1,0 +1,10 @@
+-------------------------------------------------------------------------------
+Test set: com.tradeteq.screenplay.CreateCoperate
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 43.119 sec <<< FAILURE! - in com.tradeteq.screenplay.CreateCoperate
+VerifyDisplayingTheRequiredErrorMessage(com.tradeteq.screenplay.CreateCoperate)  Time elapsed: 14.648 sec  <<< FAILURE!
+java.lang.AssertionError: 
+Expected: is "This field is required"
+     but: was "This field is required."
+	at com.tradeteq.screenplay.CreateCoperate.VerifyDisplayingTheRequiredErrorMessage(CreateCoperate.java:78)
+
