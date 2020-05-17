@@ -30,8 +30,10 @@ import static org.hamcrest.Matchers.is;
 
 @RunWith(SerenityRunner.class)
 @WithTag("screenplay")
-public class CreateCoperate extends BaseTest{
+public class CreateCoperate{
     private Actor Hai = Actor.named("Hai");
+    protected String userName = "automationpoc@yopmail.com";
+    protected String password = "1qazZAQ!";
 
     private CorporateModel corporateInformation = new CorporateModel();
     @Managed(driver = "chrome")
@@ -41,6 +43,7 @@ public class CreateCoperate extends BaseTest{
     public void HaiCanBrowserTheWeb()
     {
         WebDriverManager.chromedriver().setup();
+        hisBrowser.manage().window().maximize();
         Hai.can(BrowseTheWeb.with(hisBrowser));
         givenThat(Hai).wasAbleTo(OpenApplication.onTheHomePage());
     }
@@ -65,7 +68,10 @@ public class CreateCoperate extends BaseTest{
         givenThat(Hai).wasAbleTo(com.tradeteq.tasks.Login.with(userName, password));
         when(Hai).wasAbleTo(CreateCorporate.createCorporateWith(corporateInformation));
         then(Hai).should(seeThat(CorporateDetailsInformation.information(),
-                displays("txtSummaryDescription", equalTo(corporateInformation.txtSummaryDescription))));
+                displays("txtSummaryDescription", equalTo(corporateInformation.txtSummaryDescription)),
+                displays("txtIntCorporateID", equalTo(corporateInformation.txtIntCorporateID)),
+                displays("txtUKCompanyNumber", equalTo(corporateInformation.txtUKCompanyNumber)),
+                displays("txtPrivateName", equalTo(corporateInformation.txtPrivateName))));
     }
 
     @Test

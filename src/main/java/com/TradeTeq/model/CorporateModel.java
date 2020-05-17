@@ -55,4 +55,17 @@ public class CorporateModel {
     public CorporateModel() {
 
     }
+
+    public CorporateModel(String summaryDescription, String internalCorporateId,
+                          String legalEntityIdentifier, String uKCompanyNumber,
+                          String privateName, String primaryNameContact, String primaryEmailcontact) {
+
+        this.txtSummaryDescription = summaryDescription;
+        this.txtIntCorporateID = internalCorporateId;
+        this.txtLegalentityIdentifier = legalEntityIdentifier;
+        this.txtUKCompanyNumber = uKCompanyNumber;
+        this.txtPrivateName = privateName;
+        this.txtPrivateNameContact = primaryNameContact;
+        this.txtPrivateEmailContact = primaryEmailcontact;
+    }
 }

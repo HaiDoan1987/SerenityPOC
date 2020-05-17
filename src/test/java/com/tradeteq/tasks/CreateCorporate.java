@@ -28,8 +28,6 @@ public class CreateCorporate implements Task {
     @Step("{0} create Corporate with following information")
     public <T extends Actor> void performAs(T actor) {
         actor.attemptsTo(
-                Click.on(DashBoardPage.menuOperation),
-                Click.on(DashBoardPage.buttonCreateNewOperator),
                 Enter.theValue(corporateInformation.txtIntCorporateID).into(CreateCorporateFormPage.txtIntCorporateID),
                 Enter.theValue(corporateInformation.txtDUNSNumber).into(CreateCorporateFormPage.txtDUNSNumber),
                 Enter.theValue(corporateInformation.txtLegalentityIdentifier).into(CreateCorporateFormPage.txtLegalentityIdentifier),

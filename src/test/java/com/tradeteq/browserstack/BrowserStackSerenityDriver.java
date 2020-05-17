@@ -12,7 +12,7 @@ import net.thucydides.core.util.EnvironmentVariables;
 import net.thucydides.core.util.SystemEnvironmentVariables;
 import net.thucydides.core.webdriver.DriverSource;
 
-public class BrowserStackSerenityDriver {
+public class BrowserStackSerenityDriver implements DriverSource {
 
     public WebDriver newDriver() {
         EnvironmentVariables environmentVariables = SystemEnvironmentVariables.createEnvironmentVariables();

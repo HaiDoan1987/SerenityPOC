@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testsuite errors="0" failures="1" name="com.tradeteq.screenplay.CreateCoperate" skipped="0" tests="2" time="41.45" timestamp="2020-05-13 01:47:57"><testcase classname="com.tradeteq.screenplay.CreateCoperate" name="Verify displaying the required error message"><failure message="&#10;Expected: is &quot;This field is required&quot;&#10;     but: was &quot;This field is required.&quot;" type="java.lang.AssertionError">
-Expected: is "This field is required"
-     but: was "This field is required."</failure><system-err>
-Expected: is "This field is required"
-     but: was "This field is required."
-com.tradeteq.screenplay.CreateCoperate.VerifyDisplayingTheRequiredErrorMessage(CreateCoperate.java:78)
-</system-err></testcase><testcase classname="com.tradeteq.screenplay.CreateCoperate" name="Check corperate information after creating successfully"/></testsuite>
