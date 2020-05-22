@@ -22,6 +22,11 @@ public class Login implements Task {
         theActor.attemptsTo(Enter.theValue(userName).into(HomePage.emailField),
                 Enter.theValue(password).into(HomePage.passwordField),
                 Click.on(HomePage.btnSignIn));
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public static Login with(String userName, String password) {

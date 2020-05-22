@@ -51,12 +51,13 @@ public class NavigationStep {
 
     @Then("{actor} could navigate to following pages by hovering and clicking")
     public void verifyUserCouldHoverAndCLicking(Actor actor, DataTable table) throws InterruptedException {
+        Thread.sleep(5000);
         List<Map<String,String>> rows  = table.asMaps();
         for (Map<String, String> collumn : rows){
             Target elementMenuMenu = null;
             if (collumn.get("Menu").equals("Trade"))
             {
-                 elementMenuMenu = Target.the(collumn.get("Menu")).locatedBy("//*[@id='Layer_2']");
+                 elementMenuMenu = Target.the(collumn.get("Menu")).locatedBy("//div[@class='trade section-container']");
             }
             if (collumn.get("Menu").equals("My Company"))
             {
