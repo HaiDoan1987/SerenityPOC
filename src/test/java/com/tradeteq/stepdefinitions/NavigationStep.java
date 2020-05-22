@@ -25,18 +25,23 @@ public class NavigationStep {
     private CorporateModel corporateInformation = new CorporateModel();
 
     @Then("{actor} could navigate to following pages by clicking")
-    public void NavigateToCreateCoperateForm(Actor actor, DataTable table)
-    {
+    public void NavigateToCreateCoperateForm(Actor actor, DataTable table) throws InterruptedException {
         List<Map<String,String>> rows  = table.asMaps();
         for (Map<String, String> collumn : rows){
             Target elementMenuSubMenu = Target.the(collumn.get("Menu / Submenu")).locatedBy("//*[contains(text(),'"
                     + collumn.get("Menu / Submenu")+"')]");
+            if (collumn.get("Menu / Submenu").contains("Marketplace")) {
+                Thread.sleep(2000);
+                elementMenuSubMenu = Target.the(collumn.get("Menu / Submenu")).locatedBy("//*[@class='marketplace-icon']");
+            }
+            if (collumn.get("Menu / Submenu").contains("Operations")){
+                elementMenuSubMenu = Target.the(collumn.get("Menu / Submenu")).locatedBy("//*[@id='operations']");
+            }
             Target elementPageHeader = Target.the(collumn.get("Page Header")).locatedBy("//*[contains(text(),'"
                     + collumn.get("Page Header")+"')]");
             if (collumn.get("Page Header").equals("Marketplace"))
             {
-                ////h2[contains(text(),'Marketplace')]
-               elementPageHeader = Target.the(collumn.get("Menu / Submenu")).locatedBy("//h2[contains(text(),'Marketplace')]");
+               elementPageHeader = Target.the(collumn.get("Menu / Submenu")).locatedBy("//*[contains(text(),'Marketplace')]");
             }
             actor.wasAbleTo( Click.on(elementMenuSubMenu));
             actor.should(seeThat(Url.text(collumn.get("Desired Url")), is(collumn.get("Desired Url"))));
@@ -48,13 +53,14 @@ public class NavigationStep {
     public void verifyUserCouldHoverAndCLicking(Actor actor, DataTable table) throws InterruptedException {
         List<Map<String,String>> rows  = table.asMaps();
         for (Map<String, String> collumn : rows){
-            Target elementMenuMenu = Target.the(collumn.get("Menu")).locatedBy("//*[contains(text(),'"
-                    + collumn.get("Menu")+"')]");
-            By selector = null;
+            Target elementMenuMenu = null;
             if (collumn.get("Menu").equals("Trade"))
             {
-                 elementMenuMenu = Target.the(collumn.get("Menu")).locatedBy("//h4[contains(text(),'"
-                        + collumn.get("Menu")+"')]");
+                 elementMenuMenu = Target.the(collumn.get("Menu")).locatedBy("//*[@id='Layer_2']");
+            }
+            if (collumn.get("Menu").equals("My Company"))
+            {
+                elementMenuMenu = Target.the(collumn.get("Menu")).locatedBy("//*[@id='company']");
             }
             Target elementSubMenu = Target.the(collumn.get("Submenu")).locatedBy("//*[contains(text(),'"
                     + collumn.get("Submenu")+"')]");

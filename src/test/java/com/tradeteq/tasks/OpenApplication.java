@@ -5,6 +5,7 @@ import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Open;
 import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.WhenPageOpens;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.getDriver;
@@ -19,7 +20,8 @@ public class OpenApplication implements Task {
 
     @Step("{0} opens the application on the home page")
     public <T extends Actor> void performAs(T actor) {
-        getDriver().manage().window().maximize();
         actor.attemptsTo(Open.browserOn().the(homePage));
+        getDriver().manage().window().maximize();
+
     }
 }

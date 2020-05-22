@@ -1,6 +1,7 @@
 package com.tradeteq.stepdefinitions;
 
 import com.TradeTeq.model.CorporateModel;
+
 import com.tradeteq.pageobject.CreateCorporateFormPage;
 import com.tradeteq.pageobject.DashBoardPage;
 import com.tradeteq.questions.CorporateDetailsInformation;
@@ -15,15 +16,12 @@ import io.cucumber.java.Before;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import net.serenitybdd.screenplay.Actor;
-import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.ClickOnTarget;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
-import net.serenitybdd.screenplay.actors.Stage;
-import net.thucydides.core.annotations.Managed;
 
-import org.openqa.selenium.WebDriver;
+import org.testng.annotations.BeforeTest;
 
 import java.util.Random;
 
@@ -40,20 +38,20 @@ public class CreateCoperateStep {
     protected String password = "1qazZAQ!";
 
     private CorporateModel corporateInformation = new CorporateModel();
-    
+
+
     @Before
     public void HaiCanBrowserTheWeb()
     {
-        OnStage.setTheStage(new OnlineCast());
         WebDriverManager.chromedriver().setup();
+        OnStage.setTheStage(new OnlineCast());
+        OnStage.aNewActor().wasAbleTo(OpenApplication.onTheHomePage());
     }
 
     @Given("{actor} login to application successfully")
     public void loginSuccessfully(Actor actor)
     {
-        actor.wasAbleTo(OpenApplication.onTheHomePage());
         actor.wasAbleTo(Login.with(userName, password));
-
     }
 
     @When("{actor} goes to Coperate Form")
