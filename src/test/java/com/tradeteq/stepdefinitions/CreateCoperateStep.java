@@ -40,16 +40,12 @@ public class CreateCoperateStep {
     protected String password = "1qazZAQ!";
 
     private CorporateModel corporateInformation = new CorporateModel();
-
-
+    
     @Before
     public void HaiCanBrowserTheWeb()
     {
         OnStage.setTheStage(new OnlineCast());
         WebDriverManager.chromedriver().setup();
-        //Hai.can(BrowseTheWeb.with(hisBrowser));
-        //stage.theActorInTheSpotlight()
-
     }
 
     @Given("{actor} login to application successfully")

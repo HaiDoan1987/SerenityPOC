@@ -1,5 +1,6 @@
 Feature: Create Coperate
 
+  @SmokeTest
   Scenario Outline: Verify that user could create Coperate successfully
     Given Hai login to application successfully
     When he goes to Coperate Form
@@ -9,6 +10,7 @@ Feature: Create Coperate
       | CorporateID | txtDUNSNumber | LegalentityIdentifier | UKCompanyNumber | Name | SummaryDescription | PrivateName | PrivateNameContact | PrivateEmailContact | BusinessAddress_Add1      | BusinessAddressCity       | BusinessAddressCountry | CompanyRegistrationNumber |
       | unique      | unique        | unique                | unique          | Hod  | Automation Script  | HoD auto    | HoD Contact        | HoDAuto1221@abc.com | HoD Business Address_Add1 | HoD Business Address City | Afghanistan            | unique                    |
 
+    @SmokeTest
     Scenario: verify that there is error message
       Given Hai login to application successfully
       When he goes to Coperate Form
