@@ -13,24 +13,105 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
-# jobs:
-#   # This workflow contains a single job called "build"
-# #   build:
-# #     # The type of runner that the job will run on
-# #     runs-on: ubuntu-latest
+jobs:
 
-# #     # Steps represent a sequence of tasks that will be executed as part of the job
-# #     steps:
-# #       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-# #       - uses: actions/checkout@v2
+  run-test:
 
-# #       # Runs a single command using the runners shell
-# #       - name: Run a one-line script
-# #         run: echo Hello, world!
 
-# #       # Runs a set of commands using the runners shell
-# #       - name: Run a multi-line script
-# #         run: |
-# #           echo Add other actions to build,
-# #           echo test, and deploy your project.
+    runs-on: macos-latest
+
+
+    steps:
+
+      - uses: actions/checkout@v2
+
+      - name: Set up JDK 11
+
+        uses: actions/setup-java@v2
+
+        with:
+
+          java-version: '11'
+
+          distribution: 'adopt'
+
+      - name: Install allure for Macos
+
+        run: |
+
+          brew update
+
+          brew install allure
+
+      - name: Execute test
+
+        if: always()
+
+#         run: mvn test -DsuiteXmlFile=FunctionTest.xml
+
+        env:
+
+          CI: true
+
+      - name: Rerun failed tests
+
+        if: always()
+
+#         run: mvn test -DsuiteXmlFile=${{ env.FAILED_XML }}
+
+        env:
+
+          CI: true
+
+      - name: Pull old Allure reports
+
+        uses: actions/checkout@v2
+
+        if: always()
+
+        continue-on-error: true
+
+        with:
+
+          ref: gh-pages
+
+          path: ./gh-pages
+
+      - name: Generate Allure report history
+
+        if: always()
+
+        run: sh ./prepare_allure_report.sh
+
+      - name: Package report
+
+        if: always()
+
+        uses: actions/upload-artifact@v2
+
+        with:
+
+          name: allure-report${{ env.PR_NUMBER }}
+
+          path: ./main-report/allure-report
+
+      - name: Clean up generated report
+
+        if: always()
+
+        run: |
+
+          rm -rf ./main-report/allure-report
+
+      - name: Publish report
+
+        if: always()
+
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+
+        with:
+
+          branch: gh-pages
+
+          folder: ./main-report
+
